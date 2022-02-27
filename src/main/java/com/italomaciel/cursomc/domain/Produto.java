@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 //mapeamento básico
 @Entity
 public class Produto implements Serializable {
@@ -24,7 +26,8 @@ public class Produto implements Serializable {
 	private String nome;
 	private Double preco;
 	
-	//Mapeamento de muito para muitos, mostrando a tabela que se localizará entre elas, identificando as chaves estrangeiras. 
+	//Mapeamento de muito para muitos, mostrando a tabela que se localizará entre elas, identificando as chaves estrangeiras.
+	@JsonBackReference
 	@ManyToMany 
 	@JoinTable(name = "PRODUTO_CATEGORIA",
 			joinColumns = @JoinColumn(name = "produto_id"),

@@ -16,6 +16,8 @@ import com.italomaciel.cursomc.repositories.ProdutoRepository;
 public class PraticamcApplication implements CommandLineRunner {
 	// O CommandLineRunner permite ao iniciar a aplicação executar uma ação por meio de uma função auxiliar.
 	
+	/*Referência cíclica, como as duas classes categoria e produto estão correlacionadas, quando chama uma delas na aplicação 
+	fica fazendo uma chamada uma pela outra de forma indefinida, gerando uma exceção.*/
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	@Autowired
