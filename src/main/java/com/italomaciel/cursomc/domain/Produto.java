@@ -30,8 +30,9 @@ public class Produto implements Serializable {
 	private String nome;
 	private Double preco;
 	
+	//Combinação bidirecional JsonBack e JsonManager que resolvem problemas de serialização cíclica.
 	//Mapeamento de muito para muitos, mostrando a tabela que se localizará entre elas, identificando as chaves estrangeiras.
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany 
 	@JoinTable(name = "PRODUTO_CATEGORIA",
 			joinColumns = @JoinColumn(name = "produto_id"),
