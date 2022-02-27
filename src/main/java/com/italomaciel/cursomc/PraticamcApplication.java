@@ -13,6 +13,7 @@ import com.italomaciel.cursomc.domain.Cidade;
 import com.italomaciel.cursomc.domain.Cliente;
 import com.italomaciel.cursomc.domain.Endereco;
 import com.italomaciel.cursomc.domain.Estado;
+import com.italomaciel.cursomc.domain.ItemPedido;
 import com.italomaciel.cursomc.domain.Pagamento;
 import com.italomaciel.cursomc.domain.PagamentoComBoleto;
 import com.italomaciel.cursomc.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.italomaciel.cursomc.repositories.CidadeRepository;
 import com.italomaciel.cursomc.repositories.ClienteRepository;
 import com.italomaciel.cursomc.repositories.EnderecoRepository;
 import com.italomaciel.cursomc.repositories.EstadoRepository;
+import com.italomaciel.cursomc.repositories.ItemPedidoRepository;
 import com.italomaciel.cursomc.repositories.PagamentoRepository;
 import com.italomaciel.cursomc.repositories.PedidoRepository;
 import com.italomaciel.cursomc.repositories.ProdutoRepository;
@@ -51,6 +53,8 @@ public class PraticamcApplication implements CommandLineRunner {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PraticamcApplication.class, args);
@@ -116,6 +120,19 @@ public class PraticamcApplication implements CommandLineRunner {
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));
+		
+		ItemPedido ip1 = new ItemPedido(p1, ped1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(p3, ped1, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(p2, ped2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
 		
 	}
 
