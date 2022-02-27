@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.italomaciel.cursomc.domain.enums.EstadoPagamento;
 
 //O abstract faz com que não seja possível instancear do tipo dessa classe abstrata.
@@ -24,6 +25,7 @@ public abstract class Pagamento implements Serializable {
 	private Integer id;
 	private Integer estado; //Possibilita gerar um estado de pagamento com o inteiro criado pelo o programa e não diretamente pelo banco
 	
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name="pedido_id")
 	@MapsId

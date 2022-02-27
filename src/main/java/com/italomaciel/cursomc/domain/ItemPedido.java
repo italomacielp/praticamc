@@ -6,12 +6,15 @@ import java.util.Objects;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 //A classe de associação terá como o id, os id's das classes que estão associadas com ela. 
 
 @Entity
 public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@JsonIgnore
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK(); //Classe auxiliar para representar a chave composta (aponta para pedido e produto).
 
@@ -64,8 +67,9 @@ public class ItemPedido implements Serializable {
 		this.preco = preco;
 	}
 	
-	//Melhora a semântica da classe, tendo acesso direto aos produtos e pedido.
+	//Melhora a semântica da classe, tendo acesso direto aos produtos e pedido. Tudo que é get serializa também.
 	
+	@JsonIgnore
 	public Produto getProduto() {
 		return id.getProduto();
 	}
